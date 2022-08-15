@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleCPUStressTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="184" Width="417"
+        Title="Simple CPU Stress Test" Height="184" Width="417"
                 xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="True" Closing="Window_Closing">
+        ui:WindowHelper.UseModernWindowStyle="True" Closing="Window_Closing" ResizeMode="CanMinimize">
     <!-- Window content here -->
     <Grid>
         <Button Content="DynamicBtn" FontSize="24" Margin="10,10,0,0" VerticalAlignment="Top" Height="74" Width="198" x:Name="DynamicBtn" Click="DynamicBtn_Click"/>
-        <TextBlock HorizontalAlignment="Left" x:Name="StatusBlock" FontSize="30" Margin="213,10,0,0" TextWrapping="Wrap" Text="dynamicblock" VerticalAlignment="Top" Height="69" Width="204"/>
-        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Margin="218,84,0,0" TextWrapping="Wrap" x:Name="TimerBox" Text="timerbox" VerticalAlignment="Top" Width="194"/>
-        <Label Content="about tbd" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Height="69" Width="198"/>
+        <TextBlock HorizontalAlignment="Left" x:Name="StatusBlock" FontSize="30" Margin="213,2,0,0" TextWrapping="Wrap" Text="dynamicblock" VerticalAlignment="Top" Height="45" Width="204"/>
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Margin="218,52,0,0" TextWrapping="Wrap" x:Name="TimerBox" Text="timerbox" VerticalAlignment="Top" Width="194"/>
+        <Label Content="A simple CPU stress test, &#xD;&#xA;made by Jurij15 in C#" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Height="69" Width="198"/>
+        <Button Content="Enable Console" x:Name="EnableConsoleBtn" Click="EnableConsoleBtn_Click" Margin="218,92,0,0" VerticalAlignment="Top" Width="189"/>
     </Grid>
 </Window>

@@ -20,6 +20,7 @@ namespace SimpleCPUStressTest
         public static void SetupConsole()
         {
             AllocConsole();
+            Console.WriteLine("Console Enabled!");
         }
     }
 }

@@ -32,6 +32,7 @@ namespace SimpleCPUStressTest
             Globals.time = (int)ts.TotalSeconds;
             TimerBox.Clear(); //incase there is something there already
             TimerBox.Text = Globals.time.ToString();
+            Console.WriteLine("Running for " + Globals.time.ToString() +" seconds");
         }
         public MainWindow()
         {
@@ -54,6 +55,7 @@ namespace SimpleCPUStressTest
                 LiveTime.Tick += timer_tick;
                 LiveTime.Start();
                 StatusBlock.Text = "Running";
+                Console.WriteLine("Test State Changed to RUNNING!");
                 Test.StartTest();
             }
             else if (Globals.bShouldTestBeRunning)
@@ -61,6 +63,7 @@ namespace SimpleCPUStressTest
                 Test.StopTest();
                 DynamicBtn.Content = "Start";
                 StatusBlock.Text = "Not Running";
+                Console.WriteLine("Test State Changed to NOT RUNNING!");
                 LiveTime.Stop();
                 stopwatch.Reset();
             }
@@ -69,7 +72,15 @@ namespace SimpleCPUStressTest
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Globals.bShouldTestBeRunning = false;
+            Console.WriteLine("Exiting...");
             Environment.Exit(0);
+        }
+
+        private void EnableConsoleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Globals.SetupConsole();
+            Globals.bEnableLogging = true;
+            EnableConsoleBtn.IsEnabled = false;
         }
     }
 }

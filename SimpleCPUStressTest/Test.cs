@@ -17,16 +17,18 @@ namespace SimpleCPUStressTest
             {
                 if (!Globals.bShouldTestBeRunning)
                 {
-                    break;
+                    break;                
                 }
             }
         }
         public static void StopTest()
         {
             Globals.bShouldTestBeRunning = false;
+            Console.WriteLine("Test stopped!");
         }
         public static void StartTest()
         {
+            Console.WriteLine("Test started!");
             for (int ix = 0; ix < Environment.ProcessorCount; ++ix)
             {
                 new Thread(loopForever).Start();
