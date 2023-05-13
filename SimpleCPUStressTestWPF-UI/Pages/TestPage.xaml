@@ -11,53 +11,86 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TestPage">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Stress Test" Grid.Row="0" FontWeight="DemiBold" Margin="12,12,12,12" FontSize="30"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <ui:Card x:Name="CPUUsageCard" Margin="8,8,8,8">
-                <StackPanel>
-                    <TextBlock Text="CPU Usage" FontSize="12" FontWeight="Medium"/>
-                    <ProgressBar x:Name="CPUUsageProgressbar" Margin="2,2,2,2"/>
-                    <TextBlock Text="999" x:Name="CPUUsageBlock" FontWeight="SemiBold" FontSize="34"/>
-                </StackPanel>
-            </ui:Card>
-            <ui:Card x:Name="CPUTempCard" Margin="0,8,0,8" >
-                <StackPanel>
-                    <TextBlock Text="CPU Temperature" FontSize="12" FontWeight="Medium"/>
-                    <ProgressBar x:Name="CPUTempProgressBar" Margin="2,2,2,2"/>
-                    <TextBlock Text="999" x:Name="CPUTempBlock" FontWeight="SemiBold" FontSize="34"/>
-                </StackPanel>
-            </ui:Card>
-            <ui:Card x:Name="TestRunningTimeCard" Margin="8,8,8,8">
-                <StackPanel>
-                    <TextBlock Text="Running Time" FontSize="12" FontWeight="Medium"/>
-                    <ProgressBar Visibility="Hidden" Margin="2,2,2,2"/>
-                    <TextBlock Text="9999" x:Name="RunningTimeBlock" FontWeight="SemiBold" FontSize="34"/>
-                </StackPanel>
-            </ui:Card>
-            <ui:Card x:Name="TestStatusCard" Margin="0,8,0,8">
-                <StackPanel>
-                    <TextBlock Text="Status" FontSize="12" FontWeight="Medium"/>
-                    <ProgressBar Visibility="Hidden" Margin="2,2,2,2"/>
-                    <TextBlock Text="Stopped" x:Name="TestStatusTextBlock" FontWeight="SemiBold" FontSize="34"/>
-                </StackPanel>
-            </ui:Card>
-        </StackPanel>
+    <ui:DynamicScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Stress Test" Grid.Row="0" FontWeight="DemiBold" Margin="12,12,12,4" FontSize="30"/>
 
-        <ui:CardExpander Grid.Row="10" VerticalAlignment="Bottom" Margin="8,8,8,8" IsExpanded="True">
-            <ui:CardExpander.Header>
+            <ui:InfoBar x:Name="CPUTempHigh" Title="CPU Temperature is high" Message="CPU Temperature is high. Test will be stopped soon. You can disable this in settings" Severity="Error" IsClosable="False" IsOpen="False" Margin="4,4,4,0" Grid.Row="1"/>
+            <DockPanel Grid.Row="8" x:Name="NewStatsDisplayPanel" LastChildFill="True" Margin="8,4,8,0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Statistics" FontWeight="DemiBold" FontSize="15" Margin="8,8,8,8"/>
+                    <DockPanel LastChildFill="True">
+                        <ui:Card x:Name="NewCpuStatsDisplayCard">
+                            <StackPanel>
+                                <StackPanel Orientation="Vertical" x:Name="TemperaturePanel">
+                                    <ProgressBar x:Name="TemperatureProgressBar" Maximum="100" MinWidth="350"/>
+                                    <Grid>
+                                        <TextBlock Text="Temperature" FontSize="12" FontWeight="Normal" Margin="4,0,0,0" Foreground="LightGray"/>
+                                        <TextBlock Text="99" x:Name="TemperatureValue" FontSize="12" FontWeight="Normal" Foreground="LightGray" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel x:Name="ClockPanel" Margin="0,8,0,8">
+                                    <ProgressBar x:Name="ClockProgressBar" Maximum="5500"  MinWidth="350"/>
+                                    <Grid>
+                                        <TextBlock Text="Average Clock (all cores)" FontSize="12" FontWeight="Normal" Margin="4,0,0,0" Foreground="LightGray"/>
+                                        <TextBlock Text="99" x:Name="ClockValue" FontSize="12" FontWeight="Normal" Foreground="LightGray" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel x:Name="PowerPanel" Margin="0,0,0,8">
+                                    <ProgressBar x:Name="PowerProgressBar" Maximum="5500"  MinWidth="350"/>
+                                    <Grid>
+                                        <TextBlock Text="Power" FontSize="12" FontWeight="Normal" Margin="4,0,0,0" Foreground="LightGray"/>
+                                        <TextBlock Text="99" x:Name="PowerValue" FontSize="12" FontWeight="Normal" Foreground="LightGray" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel x:Name="UsagePanel" Margin="0,0,0,8">
+                                    <ProgressBar x:Name="UsageProgressBar" Maximum="5500"  MinWidth="350"/>
+                                    <Grid>
+                                        <TextBlock Text="Usage" FontSize="12" FontWeight="Normal" Margin="4,0,0,0" Foreground="LightGray"/>
+                                        <TextBlock Text="99" x:Name="UsageValue" FontSize="12" FontWeight="Normal" Foreground="LightGray" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                            <ui:Card.Footer>
+                                <Grid>
+                                    <TextBlock Text="CPU Name" FontSize="16" x:Name="CPUNameBlock"/>
+                                    <Image x:Name="CPUBrandImage" HorizontalAlignment="Right" MaxHeight="16"/>
+                                </Grid>
+                            </ui:Card.Footer>
+                        </ui:Card>
+                    </DockPanel>
+                </StackPanel>
+            </DockPanel>
+
+            <ui:CardExpander Grid.Row="10" VerticalAlignment="Bottom" Margin="8,8,8,8" IsExpanded="True" x:Name="TestSettingsExpander">
+                <ui:CardExpander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Test" FontWeight="Medium" FontSize="16" Grid.Row="1"/>
+                        <TextBlock x:Name="TestStatus" Text="Stopped, Running for 0 seconds" Foreground="LightGray" FontSize="12" Grid.Row="2"/>
+
+                        <ui:Button HorizontalAlignment="Right" Content="Start" x:Name="TestStartBtn" Click="TestStartBtn_Click" VerticalAlignment="Center" Grid.RowSpan="3" Appearance="Primary" Margin="4,4,4,4" Visibility="Visible"/>
+                        <ui:Button HorizontalAlignment="Right" Content="Stop" x:Name="TestStopBtn" Click="TestStopBtn_Click" VerticalAlignment="Center" Grid.RowSpan="3" Appearance="Danger" Margin="4,4,4,4" Visibility="Collapsed"/>
+                    </Grid>
+                </ui:CardExpander.Header>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -65,29 +98,18 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Test" FontWeight="Medium" FontSize="16" Grid.Row="1"/>
-                    <TextBlock Text="Test settings, start the test" Foreground="LightGray" FontSize="12" Grid.Row="2"/>
+                    <TextBlock Text="Settings" FontSize="15" FontWeight="SemiBold" Grid.Row="0" Margin="4,4,4,4"/>
 
-                    <ui:Button HorizontalAlignment="Right" Content="Start" x:Name="TestStartBtn" VerticalAlignment="Center" Grid.RowSpan="3" Appearance="Primary" Margin="4,4,4,4"/>
+                    <TextBlock Text="CPU Usage" FontSize="12" FontWeight="Medium" Grid.Row="1" Margin="4,14,4,4"/>
+                    <ui:NumberBox x:Name="CPUUsageUserSetting" IsUndoEnabled="False" Grid.Row="2" Margin="4,4,4,4" IsReadOnlyCaretVisible="False" Value="100" IntegersOnly="True" Max="100"/>
+
+                    <ui:ToggleSwitch Content="Save this test" x:Name="SaveTestToggle" Checked="SaveTestToggle_Checked" Unchecked="SaveTestToggle_Unchecked" Margin="4,4,4,4" Grid.Row="3"/>
                 </Grid>
-            </ui:CardExpander.Header>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Settings" FontSize="15" FontWeight="SemiBold" Grid.Row="0" Margin="4,4,4,4"/>
-
-                <TextBlock Text="CPU Usage" FontSize="12" FontWeight="Medium" Grid.Row="1" Margin="4,14,4,4"/>
-                <ui:NumberBox x:Name="CPUUsageUserSetting" IsUndoEnabled="False" Grid.Row="2" Margin="4,4,4,4" IsReadOnlyCaretVisible="False" Value="100" IntegersOnly="True" Max="100"/>
-            </Grid>
-        </ui:CardExpander>
-    </Grid>
+            </ui:CardExpander>
+        </Grid>
+    </ui:DynamicScrollViewer>
 </ui:UiPage>

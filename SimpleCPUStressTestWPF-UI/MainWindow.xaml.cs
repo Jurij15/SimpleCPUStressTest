@@ -29,6 +29,13 @@ namespace SimpleCPUStressTestUI
             RootNavigation.Navigate(typeof(TestPage));
 
             Wpf.Ui.Appearance.Accent.Apply(Colors.LightGreen);
+
+            Config.TestSnackbar = TestSnackbar;
+
+            TestSnackbar.Visibility = Visibility.Collapsed;
+            Config.TestSnackbar.Show();
+
+            Config.MainWindow = this;
         }
 
         private void FluentWindow_Loaded(object sender, RoutedEventArgs e)
@@ -42,6 +49,11 @@ namespace SimpleCPUStressTestUI
             {
                 Config.GComputer.Close();
             }
+        }
+
+        private void TestSnackbar_Closed(Wpf.Ui.Controls.Snackbar sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

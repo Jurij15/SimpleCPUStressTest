@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleCPUStressTestWPF_UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,8 @@ namespace SimpleCPUStressTestUI.Pages
                 DarkRadio.IsChecked = false;
                 LightRadio.IsChecked = true;
             }
+
+            MicaBackdrop.IsChecked = true;
         }
 
         private void LightRadio_Checked(object sender, RoutedEventArgs e)
@@ -48,6 +51,38 @@ namespace SimpleCPUStressTestUI.Pages
         {
             Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Dark);
             Wpf.Ui.Appearance.Accent.Apply(Colors.LightGreen);
+        }
+
+        private void CPUTempWarningsSwitch_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CPUTempWarningsSwitch_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CPUTempStopTest_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CPUTempStopTest_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MicaBackdrop_Checked(object sender, RoutedEventArgs e)
+        {
+            Config.MainWindow.WindowBackdropType = Wpf.Ui.Appearance.BackgroundType.Mica;
+            MicaAltBackDrop.IsChecked = false;
+        }
+
+        private void MicaAltBackDrop_Checked(object sender, RoutedEventArgs e)
+        {
+            Config.MainWindow.WindowBackdropType = Wpf.Ui.Appearance.BackgroundType.Tabbed;
+            MicaBackdrop.IsChecked = false;
         }
     }
 }

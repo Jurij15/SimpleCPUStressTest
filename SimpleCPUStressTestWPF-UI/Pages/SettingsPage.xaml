@@ -23,10 +23,63 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Settings" Margin="14,14,14,14" FontWeight="Medium" FontSize="34"/>
-        <Expander Header="Theme" FontWeight="Medium" Margin="14,14,14,14" Grid.Row="1" IsExpanded="True">
+        <Expander Header="Personalization" FontWeight="Medium" Margin="14,14,14,8" Grid.Row="1" IsExpanded="True">
             <StackPanel>
-                <RadioButton Content="Dark" x:Name="DarkRadio" Checked="DarkRadio_Checked"/>
-                <RadioButton Content="Light" x:Name="LightRadio" Checked="LightRadio_Checked"/>
+                <ui:CardControl Margin="4,4,4,4">
+                    <ui:CardControl.Header>
+                        <StackPanel>
+                            <TextBlock Text="Theme" FontSize="14" FontWeight="Medium"/>
+                            <TextBlock Text="Control App theme" FontSize="12" Foreground="LightGray"/>
+                        </StackPanel>
+                    </ui:CardControl.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Content="Dark" x:Name="DarkRadio" Checked="DarkRadio_Checked"/>
+                        <RadioButton Content="Light" x:Name="LightRadio" Checked="LightRadio_Checked"/>
+                    </StackPanel>
+                </ui:CardControl>
+                <ui:CardControl Margin="4,0,4,0">
+                    <ui:CardControl.Header>
+                        <StackPanel>
+                            <TextBlock Text="Backdrop" FontSize="14" FontWeight="Medium"/>
+                            <TextBlock Text="Control window backdrop" FontSize="12" Foreground="LightGray"/>
+                        </StackPanel>
+                    </ui:CardControl.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Content="Mica" x:Name="MicaBackdrop" Checked="MicaBackdrop_Checked"/>
+                        <RadioButton Content="MicaAlt" x:Name="MicaAltBackDrop" Checked="MicaAltBackDrop_Checked"/>
+                    </StackPanel>
+                </ui:CardControl>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Test Settings" Margin="14,0,14,0" FontWeight="Medium" Grid.Row="2" IsExpanded="False">
+            <StackPanel>
+                <ui:CardControl Margin="4,4,4,4" Icon="Temperature24">
+                    <ui:CardControl.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="CPU Temperature" FontSize="14" FontWeight="Medium"/>
+                                <TextBlock Text="Control what happens when CPU temperature is high" FontSize="12" Foreground="LightGray"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:CardControl Header="Show high CPU temperature warnings" Margin="2,2,2,2">
+                            <ui:ToggleSwitch IsChecked="True" x:Name="CPUTempWarningsSwitch" Checked="CPUTempWarningsSwitch_Checked" Unchecked="CPUTempWarningsSwitch_Unchecked"/>
+                        </ui:CardControl>
+                        <ui:CardControl Header="Stop test if CPU temperature is high" Margin="2,2,2,2">
+                            <ui:ToggleSwitch x:Name="CPUTempStopTest" Checked="CPUTempStopTest_Checked" Unchecked="CPUTempStopTest_Unchecked" IsChecked="True"/>
+                        </ui:CardControl>
+                    </StackPanel>
+                </ui:CardControl>
+                <ui:CardControl x:Name="TestRefreshIntervalCard" Margin="4,2,4,2" Icon="FastAcceleration24">
+                    <ui:CardControl.Header>
+                        <StackPanel>
+                            <TextBlock Text="Statistics refresh rate" FontSize="14" FontWeight="Medium"/>
+                            <TextBlock Text="Lower this statistics are freezing" FontSize="12" Foreground="LightGray"/>
+                        </StackPanel>
+                    </ui:CardControl.Header>
+                    <ui:NumberBox IntegersOnly="True" x:Name="StatisticsRefreshRateUserSettings"/>
+                </ui:CardControl>
             </StackPanel>
         </Expander>
     </Grid>
