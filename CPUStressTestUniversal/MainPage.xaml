@@ -26,22 +26,28 @@
                 HorizontalAlignment="Left"
         FontFamily="Segoe UI Variable Text"
         FontSize="12"
-        Text="Store Layout Template" />
+        Text="CPU Stress Test" />
         </Grid>
         <controls:NavigationView Grid.Row="1"
                                  x:Name="MainNavigation"
                                  IsBackButtonVisible="Collapsed"
                                  IsPaneOpen="False"
                                  AlwaysShowHeader="True"
+                                 ItemInvoked="MainNavigation_Navigate"
+                                 OpenPaneLength="172"
                                  >
             <controls:NavigationView.MenuItems>
-                <controls:NavigationViewItem Icon="Home" Content="Home">
+                <controls:NavigationViewItem Icon="Home" Content="Home" x:Name="HomeItem">
                     
                 </controls:NavigationViewItem>
                 <controls:NavigationViewItemSeparator/>
                 <controls:NavigationViewItem Content="Stress Test">
                     <controls:NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xEC4A;"/>
+                        <controls:AnimatedIcon x:Name='AnimatedIcon'>
+                            <controls:AnimatedIcon.FallbackIconSource>
+                                <controls:FontIconSource FontFamily="Segoe MDL2 Assets" Glyph="&#xEC4A;"/>
+                            </controls:AnimatedIcon.FallbackIconSource>
+                        </controls:AnimatedIcon>
                     </controls:NavigationViewItem.Icon>
                 </controls:NavigationViewItem>
                 <controls:NavigationViewItem Content="History">
@@ -51,14 +57,8 @@
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
             <controls:NavigationView.Content>
-                <Frame x:Name="ContentFrame">
-                    <Frame.ContentTransitions>
-                        <TransitionCollection>
-                            <NavigationThemeTransition>
-                                <SuppressNavigationTransitionInfo />
-                            </NavigationThemeTransition>
-                        </TransitionCollection>
-                    </Frame.ContentTransitions>
+                <Frame x:Name="ContentFrame"
+                           >
                 </Frame>
             </controls:NavigationView.Content>
         </controls:NavigationView>

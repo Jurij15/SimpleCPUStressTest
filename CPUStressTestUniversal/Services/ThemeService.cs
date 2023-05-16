@@ -34,7 +34,7 @@ namespace CPUStressTestUniversal.Services
             await _currentWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 //var themeSetting = (int)SettingsHelper.GetValue(Settings.Theme);
-                var themeSetting = 0;
+                var themeSetting = Globals.Theme;
 
                 if (themeSetting == 0)
                 {
